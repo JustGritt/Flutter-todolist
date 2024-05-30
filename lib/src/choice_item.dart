@@ -11,9 +11,9 @@ class ChoiceItem extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: Chip(
         label: Text(label),
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.grey[300],
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), 
+          borderRadius: BorderRadius.circular(20.0),
         ),
       ),
     );

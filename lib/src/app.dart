@@ -7,11 +7,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple[400],
+        toolbarHeight: 0, 
+        elevation: 0,
+      ),
+      body: const Column(
         children: [
-          Header(),
-          Expanded(child: SizedBox()), 
+          Expanded(child: Header()), 
           Footer(),
         ],
       ),
