@@ -23,7 +23,8 @@ class Header extends StatelessWidget {
               const SizedBox(height: 48),
               const Text('Vos choix :', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
-              const Text('Cliquez sur les choix en dessous !', style: TextStyle(color: Colors.white, fontSize: 16)),
+              if (selectedChoices.isEmpty) 
+                const Text('Cliquez sur les choix en dessous !', style: TextStyle(color: Colors.white, fontSize: 16)),
               const SizedBox(height: 16),
               Wrap(
                 spacing: 8.0,
