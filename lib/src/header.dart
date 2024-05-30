@@ -26,6 +26,8 @@ class Header extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0, 
             children: selectedChoices.map((choice) => GestureDetector(
               onTap: () => onChoiceDeselected(choice),
               child: Chip(

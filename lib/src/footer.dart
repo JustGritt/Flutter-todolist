@@ -11,9 +11,10 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300.0, 
-      padding: const EdgeInsets.all(16.0), 
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8.0), 
       child: SingleChildScrollView(
         child: Wrap(
+          alignment: WrapAlignment.start,
           children: choices.map((choice) => GestureDetector(
             onTap: () => onChoiceSelected(choice),
             child: ChoiceItem(label: choice),
