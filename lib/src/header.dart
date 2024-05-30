@@ -14,7 +14,7 @@ class Header extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       color: Provider.of<Global>(context).selectedColor,
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Stack(
         children: [
           Column(
@@ -50,10 +50,13 @@ class Header extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: 0,
+            top: 40,
             right: 0,
             child: IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,

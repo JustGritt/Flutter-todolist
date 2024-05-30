@@ -50,6 +50,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Provider.of<Global>(context).selectedColor,
+        toolbarHeight: 8,
         elevation: 0,
       ),
       body: Column(
