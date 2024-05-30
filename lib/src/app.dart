@@ -38,9 +38,10 @@ class _HomeState extends State<Home> {
 
   void _onChoiceSelected(String choice) {
     setState(() {
-      if (!_selectedChoices.contains(choice)) {
+      if (_selectedChoices.contains(choice)) {
+        _selectedChoices.remove(choice);
+      } else {
         _selectedChoices.add(choice);
-        _allChoices.remove(choice);
       }
     });
   }
@@ -56,7 +57,7 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           Expanded(child: Header(selectedChoices: _selectedChoices)),
-          Footer(choices: _allChoices, onChoiceSelected: _onChoiceSelected),
+          Footer(choices: _allChoices, onChoiceSelected: _onChoiceSelected, selectedChoices: _selectedChoices),
         ],
       ),
     );

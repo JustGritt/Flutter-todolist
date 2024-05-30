@@ -4,8 +4,9 @@ import 'choice_item.dart';
 class Footer extends StatelessWidget {
   final List<String> choices;
   final Function(String) onChoiceSelected;
+  final List<String> selectedChoices;
 
-  const Footer({super.key, required this.choices, required this.onChoiceSelected});
+  const Footer({super.key, required this.choices, required this.onChoiceSelected, required this.selectedChoices});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,10 @@ class Footer extends StatelessWidget {
           alignment: WrapAlignment.start,
           children: choices.map((choice) => GestureDetector(
             onTap: () => onChoiceSelected(choice),
-            child: ChoiceItem(label: choice),
+            child: ChoiceItem(
+              label: choice,
+              isSelected: selectedChoices.contains(choice),
+            ),
           )).toList(),
         ),
       ),
