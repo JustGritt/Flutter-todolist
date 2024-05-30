@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'header.dart';
 import 'footer.dart';
+import 'global.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,9 +27,7 @@ class _HomeState extends State<Home> {
     final response = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=10'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<String> pokemonNames = (data['results'] as List)
-          .map((pokemon) => pokemon['name'] as String)
-          .toList();
+      final List<String> pokemonNames = (data['results'] as List).map((pokemon) => pokemon['name'] as String).toList();
       setState(() {
         _allChoices.addAll(pokemonNames);
       });
@@ -45,26 +45,16 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _onChoiceDeselected(String choice) {
-    setState(() {
-      if (_selectedChoices.contains(choice)) {
-        _selectedChoices.remove(choice);
-        _allChoices.add(choice);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[400],
+        backgroundColor: Provider.of<Global>(context).selectedColor,
         elevation: 0,
-        toolbarHeight: 8,
       ),
       body: Column(
         children: [
-          Expanded(child: Header(selectedChoices: _selectedChoices, onChoiceDeselected: _onChoiceDeselected)),
+          Expanded(child: Header(selectedChoices: _selectedChoices)),
           Footer(choices: _allChoices, onChoiceSelected: _onChoiceSelected),
         ],
       ),

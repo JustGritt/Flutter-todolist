@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../global.dart';
 
 class PokemonDetail extends StatefulWidget {
   final String pokemonName;
@@ -34,13 +35,13 @@ class _PokemonDetailState extends State<PokemonDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[400],
+      backgroundColor: Global().selectedColor,
       appBar: AppBar(
         title: Text(
           widget.pokemonName[0].toUpperCase() + widget.pokemonName.substring(1).toLowerCase(),
           style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.deepPurple[400],
+        backgroundColor: Global().selectedColor,
       ),
       body: _pokemonData == null
           ? const Center(child: CircularProgressIndicator())
@@ -75,9 +76,9 @@ class _PokemonDetailState extends State<PokemonDetail> {
                   ...(_pokemonData!['abilities'] as List)
                       .map((ability) => Text(
                             ability['ability']['name'],
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ))
-                      .toList(),
+                      ,
                 ],
               ),
             ),
