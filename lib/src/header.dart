@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final List<String> selectedChoices;
+  final Function(String) onChoiceDeselected;
+
+  const Header({super.key, required this.selectedChoices, required this.onChoiceDeselected});
 
   @override
   Widget build(BuildContext context) {
@@ -9,17 +12,30 @@ class Header extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       color: Colors.deepPurple[400],
       padding: const EdgeInsets.all(32.0),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Vos choix :',
             style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             'Cliquez sur les choix en dessous !',
             style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            children: selectedChoices.map((choice) => GestureDetector(
+              onTap: () => onChoiceDeselected(choice),
+              child: Chip(
+                label: Text(choice),
+                backgroundColor: Colors.grey[300],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+            )).toList(),
           ),
         ],
       ),
