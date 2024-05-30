@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/pokemon_detail.dart';
 
 class Header extends StatelessWidget {
   final List<String> selectedChoices;
@@ -26,10 +27,18 @@ class Header extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0, 
+            spacing: 8.0, // Horizontal spacing between chips
+            runSpacing: 8.0, // Vertical spacing between chips
             children: selectedChoices.map((choice) => GestureDetector(
-              onTap: () => onChoiceDeselected(choice),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PokemonDetail(pokemonName: choice),
+                  ),
+                );
+              },
+              onLongPress: () => onChoiceDeselected(choice),
               child: Chip(
                 label: Text(choice),
                 backgroundColor: Colors.grey[300],

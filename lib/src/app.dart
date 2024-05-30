@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'header.dart';
 import 'footer.dart';
 
@@ -10,11 +12,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<String> _allChoices = [
-    'cinema', 'petanque', 'fitness', 'League Of Legend',
-    'basket', 'shopping', 'programmation',
-  ];
+  final List<String> _allChoices = [];
   final List<String> _selectedChoices = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPokemonData();
+  }
+
+  Future<void> _fetchPokemonData() async {
+    final response = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=10'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<String> pokemonNames = (data['results'] as List)
+          .map((pokemon) => pokemon['name'] as String)
+          .toList();
+      setState(() {
+        _allChoices.addAll(pokemonNames);
+      });
+    } else {
+      throw Exception('Failed to load Pokémon data');
+    }
+  }
 
   void _onChoiceSelected(String choice) {
     setState(() {
